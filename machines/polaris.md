@@ -29,4 +29,19 @@ Polaris is also a **mixed-use** machine: the user runs both personal and work Cl
 
 Claude Code runs in **WSL only** on this machine — never Windows native. `~/.claude/` lives inside WSL, all bash scripts (`setup.sh`, `bootstrap.sh`) apply unchanged. No `.ps1` equivalents needed.
 
+WSL distro: Ubuntu 24.04 LTS (Noble). The WSL root is its own ~1 TB virtual disk; Windows-side drives are visible at `/mnt/c` (the 2 TB OS SSD) and `/mnt/d` (the 5 TB WD Black data drive).
+
 SSH auth to GitHub as `HexagonStorms` is already configured.
+
+---
+
+## Networking
+
+Polaris appears on Tailscale as **two** nodes that share the hostname root:
+
+- `polaris-1` — Linux, `100.89.161.6` — the WSL side. This is the node Claude Code talks from.
+- `polaris` — Windows, `100.116.170.117` — the Windows host itself.
+
+When the user says "polaris" in a transfer context, default to the WSL node (`polaris-1`) unless something specifically needs the Windows side.
+
+Nearest DERP relay is Seattle (~5–6 ms), and the link to Elowynn typically negotiates a direct UDP path rather than relaying.
