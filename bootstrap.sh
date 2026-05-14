@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # brain bootstrap — onboard a new machine.
 #
 # Run from a fresh clone of the brain repo. Handles an existing ~/.claude/
@@ -63,7 +63,7 @@ if [[ -n "$HAD_BACKUP" ]]; then
 fi
 
 # Compose CLAUDE.md for this machine.
-bash "$TARGET/setup.sh"
+zsh "$TARGET/setup.sh"
 
 echo ""
 echo "bootstrap: complete."

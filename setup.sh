@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # brain setup — composes ~/.claude/CLAUDE.md from CLAUDE.shared.md + machines/<host>.md
 #
 # Run after every git pull, or once at install time. Idempotent.
