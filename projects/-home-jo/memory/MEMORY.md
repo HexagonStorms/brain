@@ -1,2 +1,3 @@
 - [User decides by understanding](feedback_decide_by_understanding.md) — lead with mechanism + honest tradeoffs (concrete numbers); name new concepts on first mention.
+- [Skip preflight questions on basic dev setup](feedback_skip_preflight.md) — don't ask about SSH/git/WSL/etc. the user obviously already has; verify from env or assume competence.
 - [Cheddar the cat](user_cheddar.md) — the user's cat; sometimes types via keyboard.
