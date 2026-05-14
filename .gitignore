@@ -1,0 +1,32 @@
+# Generated locally by setup.sh from CLAUDE.shared.md + machines/<host>.md
+# This file is per-machine; the inputs are tracked, the composed output is not.
+CLAUDE.md
+
+# Credentials — NEVER commit
+.credentials*
+*.credential*
+*.pem
+*.key
+
+# Conversation transcripts and session logs (machine-local, can be huge)
+projects/**/*.jsonl
+sessions/
+history.jsonl
+
+# Claude Code ephemeral state
+cache/
+backups/
+file-history/
+shell-snapshots/
+session-env/
+mcp-needs-auth-cache.json
+
+# Plugins (installed per-machine)
+plugins/
+
+# Local-only settings overrides
+settings.local.json
+
+# OS noise
+.DS_Store
+Thumbs.db

@@ -1,0 +1,2 @@
+- [User decides by understanding](feedback_decide_by_understanding.md) — lead with mechanism + honest tradeoffs (concrete numbers); name new concepts on first mention.
+- [Cheddar the cat](user_cheddar.md) — the user's cat; sometimes types via keyboard.
