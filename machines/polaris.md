@@ -27,7 +27,7 @@ Polaris is also a **mixed-use** machine: the user runs both personal and work Cl
 
 ## Claude Code on Polaris
 
-Claude Code runs in **WSL only** on this machine — never Windows native. `~/.claude/` lives inside WSL, all bash scripts (`setup.sh`, `bootstrap.sh`) apply unchanged. No `.ps1` equivalents needed.
+Claude Code runs in **WSL only** on this machine — never Windows native. `~/.claude/` lives inside WSL, and `setup.sh` runs there unchanged. No `.ps1` equivalents needed.
 
 WSL distro: Ubuntu 24.04 LTS (Noble). The WSL root is its own ~1 TB virtual disk; Windows-side drives are visible at `/mnt/c` (the 2 TB OS SSD) and `/mnt/d` (the 5 TB WD Black data drive).
 
