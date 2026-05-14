@@ -32,3 +32,5 @@ This file is part of Jo's **brain** — a shared set of context files synced acr
 Per-machine reference lives in `machines/`. Per-user memory lives in `memory/`. Both travel with the repo.
 
 When asked to recall what machine I'm on, check `machines/` for the file matching this host.
+
+To audit a machine and refresh its file, run `zsh ~/Code/brain/discover.sh` — it dumps current state (hardware, mounts, Tailscale, dev tooling) to `/tmp/brain-discover-<host>.md`. Hand that path back to me and I'll merge findings into `machines/<host>.md`, commit, and push. No LLM calls inside the script; it's pure fact-gathering.
