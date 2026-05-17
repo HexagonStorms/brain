@@ -40,7 +40,7 @@ zsh ~/Code/brain/setup.sh
 
 1. Composes `~/.claude/CLAUDE.md` from `CLAUDE.shared.md` + `about-jo.md` + `machines/<host>.md`.
 2. Symlinks `~/.claude/settings.json` → `~/Code/brain/settings.json`.
-3. Symlinks `~/.claude/projects/-home-jo/memory/` → `~/Code/brain/memory/`.
+3. Symlinks `memory/` into every personal cwd under `~/.claude/projects/`. Claude Code keys project memory by cwd (`~/.claude/projects/<cwd-with-slashes-as-dashes>/memory/`), so the brain's memory dir gets linked into `$HOME`, `$HOME/Code`, and each non-work subdir of `~/Code/`. Work parents listed in `WORK_PARENTS` at the top of `setup.sh` are skipped; subdirs of a work parent inherit the exclusion automatically. Re-run `setup.sh` after cloning a new personal repo to register it.
 
 If a real file already sits at one of the symlink targets, it's moved aside with a timestamped `.machine-backup-*` suffix rather than overwritten.
 

@@ -22,7 +22,15 @@ if [[ ! -f "$BRAIN_DIR/CLAUDE.shared.md" || ! -d "$BRAIN_DIR/machines" ]]; then
     exit 1
 fi
 
-mkdir -p "$CLAUDE_DIR" "$CLAUDE_DIR/projects/-home-jo"
+mkdir -p "$CLAUDE_DIR"
+
+# Personal dirs Claude is typically launched from. The brain's memory/ is
+# symlinked into each one's ~/.claude/projects/<encoded>/memory/, so Claude
+# finds it as project memory when working there. Work parents are excluded;
+# subdirs of a work parent inherit the exclusion automatically (no symlink,
+# no memory load). Re-run setup.sh after cloning a new personal repo under
+# ~/Code/ to register it.
+WORK_PARENTS=("$HOME/Code/automatiq")
 
 # --- compose CLAUDE.md ---
 
@@ -78,6 +86,33 @@ link() {
 }
 
 link "$BRAIN_DIR/settings.json" "$CLAUDE_DIR/settings.json"
-link "$BRAIN_DIR/memory"        "$CLAUDE_DIR/projects/-home-jo/memory"
+
+# Build the list of personal cwds to register memory under.
+# Encoding: Claude Code stores per-cwd state at ~/.claude/projects/<encoded>/
+# where <encoded> is the cwd with '/' replaced by '-'.
+encode_cwd() { print -r -- "${1//\//-}"; }
+
+is_work() {
+    local dir="$1"
+    local w
+    for w in "${WORK_PARENTS[@]}"; do
+        [[ "$dir" == "$w" || "$dir" == "$w"/* ]] && return 0
+    done
+    return 1
+}
+
+PERSONAL_DIRS=("$HOME" "$HOME/Code")
+if [[ -d "$HOME/Code" ]]; then
+    for d in "$HOME/Code"/*(N/); do
+        d="${d%/}"
+        is_work "$d" || PERSONAL_DIRS+=("$d")
+    done
+fi
+
+for dir in "${PERSONAL_DIRS[@]}"; do
+    encoded="$(encode_cwd "$dir")"
+    mkdir -p "$CLAUDE_DIR/projects/$encoded"
+    link "$BRAIN_DIR/memory" "$CLAUDE_DIR/projects/$encoded/memory"
+done
 
 echo "setup: done."
