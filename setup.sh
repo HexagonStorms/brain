@@ -36,12 +36,26 @@ case "$MACHINE" in
     *)         MACHINE_FILE="" ;;
 esac
 
+ABOUT_FILE="$BRAIN_DIR/about-jo.md"
+
+compose() {
+    cat "$BRAIN_DIR/CLAUDE.shared.md"
+    if [[ -f "$ABOUT_FILE" ]]; then
+        printf '\n---\n\n'
+        cat "$ABOUT_FILE"
+    fi
+    if [[ -n "$MACHINE_FILE" && -f "$MACHINE_FILE" ]]; then
+        printf '\n---\n\n'
+        cat "$MACHINE_FILE"
+    fi
+}
+
+compose > "$CLAUDE_DIR/CLAUDE.md"
+
 if [[ -n "$MACHINE_FILE" && -f "$MACHINE_FILE" ]]; then
-    { cat "$BRAIN_DIR/CLAUDE.shared.md"; printf '\n---\n\n'; cat "$MACHINE_FILE"; } > "$CLAUDE_DIR/CLAUDE.md"
-    echo "setup: composed $CLAUDE_DIR/CLAUDE.md from CLAUDE.shared.md + machines/${MACHINE_FILE##*/}"
+    echo "setup: composed $CLAUDE_DIR/CLAUDE.md from CLAUDE.shared.md + about-jo.md + machines/${MACHINE_FILE##*/}"
 else
-    cp "$BRAIN_DIR/CLAUDE.shared.md" "$CLAUDE_DIR/CLAUDE.md"
-    echo "setup: unknown machine '$MACHINE' — deployed shared-only CLAUDE.md."
+    echo "setup: composed $CLAUDE_DIR/CLAUDE.md from CLAUDE.shared.md + about-jo.md (no machine file matched '$MACHINE')."
     echo "setup: add a case for this host in setup.sh, or set MACHINE=<name> and rerun."
 fi
 

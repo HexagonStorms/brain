@@ -16,13 +16,16 @@ This repo holds those, and `setup.sh` wires them into `~/.claude/` on each machi
 ## Layout
 
 ```
-CLAUDE.shared.md      universal instructions — composed into every host's CLAUDE.md
-machines/<host>.md    per-machine context, appended after the shared file
+CLAUDE.shared.md      assistant persona + universal behavior, composed into every host's CLAUDE.md
+about-jo.md           the user's profile (identity, preferences, communication rules), also composed in
+machines/<host>.md    per-machine context, appended after the shared files
 memory/               persistent memory (user profile, feedback, project facts)
 settings.json         Claude Code settings, symlinked into ~/.claude/
 setup.sh              wires this repo into ~/.claude/
 discover.sh           dumps current machine state to /tmp for merging into machines/
 ```
+
+Composition order for `~/.claude/CLAUDE.md` is: `CLAUDE.shared.md` (who the assistant is), `about-jo.md` (who the user is), `machines/<host>.md` (where we are).
 
 Machine-local files (plugins, sessions, credentials, history) stay in `~/.claude/` and never move into this repo.
 
@@ -35,7 +38,7 @@ zsh ~/Code/brain/setup.sh
 
 `setup.sh` is idempotent. It:
 
-1. Composes `~/.claude/CLAUDE.md` from `CLAUDE.shared.md` + `machines/<host>.md`.
+1. Composes `~/.claude/CLAUDE.md` from `CLAUDE.shared.md` + `about-jo.md` + `machines/<host>.md`.
 2. Symlinks `~/.claude/settings.json` → `~/Code/brain/settings.json`.
 3. Symlinks `~/.claude/projects/-home-jo/memory/` → `~/Code/brain/memory/`.
 
