@@ -31,6 +31,7 @@ case "$MACHINE" in
     *elowynn*) MACHINE_FILE="$BRAIN_DIR/machines/elowynn.md" ;;
     *polaris*) MACHINE_FILE="$BRAIN_DIR/machines/polaris.md" ;;
     *lenovo*)  MACHINE_FILE="$BRAIN_DIR/machines/lenovo.md"  ;;
+    *public*)  MACHINE_FILE="$BRAIN_DIR/machines/lenovo.md"  ;;
     *hetzner*) MACHINE_FILE="$BRAIN_DIR/machines/hetzner.md" ;;
     *)         MACHINE_FILE="" ;;
 esac
