@@ -3,3 +3,5 @@
 - [Use zsh, not bash](feedback_zsh_not_bash.md) — shell scripts get `#!/usr/bin/env zsh`; invoke as `zsh script.sh`. User runs zsh everywhere.
 - [No dashes in copy-ready artifacts](feedback_no_dashes_in_copy.md) — em/standard dashes are fine in chat and docs, but never in shell commands, commits, code, or messages Jo will paste verbatim.
 - [Cheddar the cat](user_cheddar.md) — the user's cat; sometimes types via keyboard.
+- [Hetzner VPS](reference_hetzner_vps.md) — `ssh hetzner` (5.78.148.196); plaza.codes production web host, nginx/PHP 8.3/MariaDB, hosted sites list.
+- [wiki.pastlives.space](reference_wiki_pastlives.md) — MediaWiki for Past Lives Makerspace, on the Hetzner VPS; docroot and troubleshooting paths.
