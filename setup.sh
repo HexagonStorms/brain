@@ -87,6 +87,21 @@ link() {
 
 link "$BRAIN_DIR/settings.json" "$CLAUDE_DIR/settings.json"
 
+# Custom slash commands and subagents travel with the brain.
+if [[ -d "$BRAIN_DIR/claude-config/commands" ]]; then
+    link "$BRAIN_DIR/claude-config/commands" "$CLAUDE_DIR/commands"
+fi
+if [[ -d "$BRAIN_DIR/claude-config/agents" ]]; then
+    link "$BRAIN_DIR/claude-config/agents" "$CLAUDE_DIR/agents"
+fi
+
+# Seed settings.local.json from the example on first run only. Machine-local
+# overrides accumulate after that and stay out of the repo.
+if [[ -f "$BRAIN_DIR/claude-config/settings.local.example.json" && ! -e "$CLAUDE_DIR/settings.local.json" ]]; then
+    cp "$BRAIN_DIR/claude-config/settings.local.example.json" "$CLAUDE_DIR/settings.local.json"
+    echo "setup: seeded $CLAUDE_DIR/settings.local.json from example"
+fi
+
 # Build the list of personal cwds to register memory under.
 # Encoding: Claude Code stores per-cwd state at ~/.claude/projects/<encoded>/
 # where <encoded> is the cwd with '/' replaced by '-'.

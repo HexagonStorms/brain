@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ssh-keygen *)",
+      "Bash(chmod 700 ~/.ssh)",
+      "Bash(chmod 600 ~/.ssh/siloh)"
+    ]
+  }
+}
