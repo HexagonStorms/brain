@@ -44,8 +44,13 @@ Stage 2 runs inside WSL Ubuntu (sets up the dev environment and wires the brain)
 
 ## What stage 2 does
 
-- Installs zsh, git, gh, build tools, Node, Docker CLI hooks for Docker Desktop.
+- Installs zsh, git, gh, build tools, Node, ripgrep, fzf, openssh-client.
+- Installs Homebrew (Linuxbrew), Claude Code CLI, Render CLI, Resend CLI.
 - Creates `~/Code/` and clones the brain.
-- Installs Claude Code CLI.
-- Installs Homebrew (Linuxbrew).
+- Generates a fresh per-machine ed25519 SSH key at `~/.ssh/$USER` and
+  installs `~/.ssh/config` from `claude-config/ssh-config.example` with
+  host aliases for `github.com`, `github-hexagonstorms`, `github-automatiq`,
+  `hetzner`, `elowynn`, and `bluehost`.
 - Configures git identity.
+- Prints the new public key with instructions for adding it to GitHub,
+  Hetzner, and Elowynn.

@@ -23,14 +23,19 @@ What each piece is for:
 
 | Path | What it is | Restore notes |
 | --- | --- | --- |
-| `~/.ssh/id_ed25519` | personal GitHub key (HexagonStorms, Past Lives) | chmod 600 |
-| `~/.ssh/lenovo` | host-scoped key | chmod 600 |
-| `~/.ssh/siloh` | purpose unknown; preserved as-is | chmod 600 |
-| `~/.ssh/config` | host aliases (incl. `github-hexagonstorms`) | chmod 600 |
+| `~/.ssh/id_ed25519` | Automatiq (work) GitHub key | chmod 600 |
+| `~/.ssh/lenovo` | old per-machine key for Lenovo (HexagonStorms / Past Lives / Bluehost) | bootstrap mints a fresh `~/.ssh/$USER` keypair, so this one only matters if you want continuity on hosts you can't re-key |
+| `~/.ssh/siloh` | Elowynn access key | chmod 600; or generate fresh and re-authorize on Elowynn |
+| `~/.ssh/config` | host aliases | bootstrap installs a fresh `~/.ssh/config` from `claude-config/ssh-config.example`, so this is optional |
 | `~/.ssh/known_hosts` | trusted host fingerprints | optional; rebuilds on first connect |
 | `~/.config/gh/` | gh CLI auth tokens | or re-run `gh auth login` |
 | `~/.claude/.credentials.json` | Claude Code auth | or re-auth interactively |
 | `~/.gitconfig-automatiq` | work identity overlay (Automatiq email) | restore verbatim |
+
+The bootstrap's "mint fresh keys" path is the cleaner default for a new
+machine — it forces you to re-add the pubkey on each service, which is also
+a good audit moment. Only restore the old keys if you have hosts where
+re-keying is painful (rare).
 
 ## Apps with no winget source
 

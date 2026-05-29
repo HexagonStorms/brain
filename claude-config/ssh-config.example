@@ -1,0 +1,55 @@
+# SSH host aliases. Installed to ~/.ssh/config by bootstrap/wsl.sh.
+# __SSHKEY__ is replaced with the per-machine keypair name at install time.
+
+# Default github.com -> personal (hexagonstorms key).
+# Any plain `git@github.com:...` clone uses this.
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/__SSHKEY__
+    IdentitiesOnly yes
+
+# Personal / hexagonstorms account (explicit alias).
+# Clone with: git@github-hexagonstorms:<owner>/<repo>.git
+Host github-hexagonstorms
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/__SSHKEY__
+    IdentitiesOnly yes
+
+# Automatiq (work) account.
+# Clone with: git@github-automatiq:<owner>/<repo>.git
+# Restore ~/.ssh/id_ed25519 from the encrypted backup before this works.
+Host github-automatiq
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+
+# Hetzner VPS (plaza.codes production host).
+# Add the per-machine pubkey to /root/.ssh/authorized_keys (or the user
+# account) before first connection. See reference_hetzner_vps memory.
+Host hetzner
+    HostName 5.78.148.196
+    User root
+    IdentityFile ~/.ssh/__SSHKEY__
+    IdentitiesOnly yes
+    # Memory note: this connection doubles stdout under ControlMaster reuse.
+    # If you see that, run with: -o ControlMaster=no -o ControlPath=none
+    ControlMaster no
+
+# Elowynn (home server) over Tailscale.
+# Reachable only when Tailscale is installed and authenticated.
+Host elowynn
+    HostName 100.90.245.125
+    User jo
+    IdentityFile ~/.ssh/__SSHKEY__
+    IdentitiesOnly yes
+
+# Cascade Rescue (Bluehost shared hosting).
+# WordPress FSE theme deploy target.
+Host bluehost
+    HostName 50.87.184.214
+    User cascader
+    IdentityFile ~/.ssh/__SSHKEY__
+    IdentitiesOnly yes
