@@ -85,6 +85,7 @@ $wingetApps = @(
     @{ id = "Cloudflare.Warp";                            source = "winget"  },
     @{ id = "Postman.Postman";                            source = "winget"  },
     @{ id = "PrivateInternetAccess.PrivateInternetAccess"; source = "winget" },
+    @{ id = "Tailscale.Tailscale";                        source = "winget"  },
     @{ id = "9WZDNCRFJ4MV";                               source = "msstore" }, # Lenovo Vantage
     @{ id = "9NF8H0H7WMLT";                               source = "msstore" }  # NVIDIA Control Panel
 )
