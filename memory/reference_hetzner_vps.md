@@ -1,8 +1,10 @@
 ---
 name: reference-hetzner-vps
 description: "Hetzner VPS (plaza.codes hosting) — SSH access, stack, hosted sites, key paths"
-metadata:
+metadata: 
+  node_type: memory
   type: reference
+  originSessionId: bcd0cdf7-868e-4bff-99cd-298336fdac06
 ---
 
 Plaza Codes production web host — where paying-client and Plaza/Past Lives sites live. NOT elowynn (that's the personal media server on residential internet).
@@ -17,5 +19,7 @@ Plaza Codes production web host — where paying-client and Plaza/Past Lives sit
 - **Monitoring**: push heartbeat to Uptime Kuma on elowynn (status.plaza.codes), alerting via ntfy.
 
 **Nginx sites enabled** (verified 2026-05-29): guild-voting.plaza.codes, gus.plaza.codes, myartstarz.com, myartstarz.plaza.codes, pastlives.plaza.codes, plaza.codes, tempo.plaza.codes, wiki.pastlives.space (+ default). There is also a **gunicorn** Python app on 127.0.0.1:8001 (fronted by one of the nginx blocks).
+
+Note (2026-05-30): `myartstarz.plaza.codes` is a defunct temporary staging alias slated for teardown — it points at the SAME docroot/db as production `myartstarz.com`, so removal means deleting only its nginx block + cert + DNS, never the docroot. See [[reference-myartstarz]].
 
 See [[reference-wiki-pastlives]] for the MediaWiki install. Related: [[reference-plaza-codes]], [[reference-github]].

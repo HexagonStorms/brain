@@ -5,3 +5,4 @@
 - [Cheddar the cat](user_cheddar.md) — the user's cat; sometimes types via keyboard.
 - [Hetzner VPS](reference_hetzner_vps.md) — `ssh hetzner` (5.78.148.196); plaza.codes production web host, nginx/PHP 8.3/MariaDB, hosted sites list.
 - [wiki.pastlives.space](reference_wiki_pastlives.md) — MediaWiki for Past Lives Makerspace, on the Hetzner VPS; docroot and troubleshooting paths.
+- [myartstarz.com](reference_myartstarz.md) — client WP/WooCommerce site on Hetzner; repo, deploy flow, docroot, retired plaza.codes alias.
