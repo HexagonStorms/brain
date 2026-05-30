@@ -18,8 +18,8 @@ Plaza Codes production web host — where paying-client and Plaza/Past Lives sit
 - **Management**: panelless, CLI-driven; per-site scripts `site-add.sh` / `site-remove.sh` (each site gets its own Linux user, PHP-FPM pool, MariaDB db, Nginx block, SSL cert). Provisioning in `plaza-codes-vps` repo.
 - **Monitoring**: push heartbeat to Uptime Kuma on elowynn (status.plaza.codes), alerting via ntfy.
 
-**Nginx sites enabled** (verified 2026-05-29): guild-voting.plaza.codes, gus.plaza.codes, myartstarz.com, myartstarz.plaza.codes, pastlives.plaza.codes, plaza.codes, tempo.plaza.codes, wiki.pastlives.space (+ default). There is also a **gunicorn** Python app on 127.0.0.1:8001 (fronted by one of the nginx blocks).
+**Nginx sites enabled** (updated 2026-05-30): guild-voting.plaza.codes, gus.plaza.codes, myartstarz.com, pastlives.plaza.codes, plaza.codes, tempo.plaza.codes, wiki.pastlives.space (+ default). There is also a **gunicorn** Python app on 127.0.0.1:8001 (fronted by one of the nginx blocks).
 
-Note (2026-05-30): `myartstarz.plaza.codes` is a defunct temporary staging alias slated for teardown — it points at the SAME docroot/db as production `myartstarz.com`, so removal means deleting only its nginx block + cert + DNS, never the docroot. See [[reference-myartstarz]].
+Note (2026-05-30): `myartstarz.plaza.codes` (a temporary staging alias that shared production's docroot/db) was torn down — nginx block + Let's Encrypt cert removed; backup of the nginx conf at `/root/teardown-backup-myartstarz-plaza-codes/`. The DNS record may still exist in Cloudflare. The `site-remove.sh` script was hardened the same day to detect shared docroots and remove aliases without touching shared data. See [[reference-myartstarz]].
 
 See [[reference-wiki-pastlives]] for the MediaWiki install. Related: [[reference-plaza-codes]], [[reference-github]].
