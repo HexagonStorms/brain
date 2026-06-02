@@ -139,6 +139,11 @@ Not installed: pnpm, bun, ripgrep, fzf.
 - `brain` (300K) — this repo
 - `elowynn-media-server` (235M) — media server stack
 
+### Monitoring
+
+- **elowynn-monitor** (repo lives on Polaris at `~/Code/elowynn-monitor`): a Rainmeter desktop panel on Polaris showing live Elowynn health (CPU / RAM / network / `/media` / uptime / `elowynn-backup` status). Two small systemd services run **here on Elowynn** and serve JSON on the tailnet: `glances` (`:61208`, system metrics) and `backup-status` (`:61209`, a Python service reading the `elowynn-backup` timer). Both enabled, both boot-start. Full explanation in that repo's `README.md`.
+- **Not yet built:** alerting + history. Intended shape is **Uptime Kuma on the Hetzner VPS** (off-box, always-on) health-checking the Glances endpoint and acting as a dead-man's switch for the monthly backup. Deliberately deferred (YAGNI).
+
 ---
 
 ## PlazaOS
