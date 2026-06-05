@@ -6,7 +6,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "claude-opus-4-7",
   "effortLevel": "xhigh",
   "theme": "dark",
   "skipAutoPermissionPrompt": true
