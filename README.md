@@ -21,6 +21,7 @@ about-jo.md           the user's profile (identity, preferences, communication r
 machines/<host>.md    per-machine context, appended after the shared files
 memory/               persistent memory (user profile, feedback, project facts)
 settings.json         Claude Code settings, symlinked into ~/.claude/
+local-llm/            aider + ollama config for local-model coding (symlinked into ~), plus run notes
 setup.sh              wires this repo into ~/.claude/
 discover.sh           dumps current machine state to /tmp for merging into machines/
 ```

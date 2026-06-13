@@ -1,0 +1,31 @@
+##########################################################################
+# Aider — global defaults (personal). Lives at ~/.aider.conf.yml
+# Per-repo overrides: drop a .aider.conf.yml at that repo's root.
+# Lookup order:  current dir  ->  git repo root  ->  this home file.
+##########################################################################
+
+# Daily-driver coding model — fits the 5080's 16 GB VRAM, fast.
+model: ollama_chat/qwen2.5-coder:14b
+
+# Used for commit messages / summaries. Pin it to a local model so aider
+# never tries to reach a cloud provider for the small stuff.
+weak-model: ollama_chat/qwen2.5-coder:14b
+
+# Heavier/smarter/slower options (spill past VRAM into your 64 GB RAM).
+# Switch per session, e.g.:
+#   aider --model ollama_chat/qwen3.6:35b
+#   aider --model ollama_chat/qwen2.5-coder:32b   # (after: ollama pull)
+
+dark-mode: true
+
+# Aider auto-commits each change, so `git log` is your durable memory.
+# Review with /diff, revert a bad one with /undo.
+
+# Auto-confirm every prompt — including running shell commands the model
+# suggests. No more y/n. Edit mistakes are recoverable via /undo (git);
+# shell side effects (rm, migrations, deploys) are NOT — so stay aware of
+# what it's about to run. Do NOT carry this posture to the ops agent.
+yes-always: true
+
+# Keep aider's scratch/cache files out of every repo's tracked history.
+gitignore: true

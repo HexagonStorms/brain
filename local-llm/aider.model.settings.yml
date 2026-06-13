@@ -1,0 +1,15 @@
+# Raise Ollama's context window above its 2048 default — otherwise it
+# SILENTLY TRUNCATES your repo map and file contents. This is the #1
+# "why is the local model dumb" gotcha. 16384 is comfortable on 64 GB RAM.
+- name: ollama_chat/qwen2.5-coder:14b
+  extra_params:
+    num_ctx: 16384
+- name: ollama_chat/qwen2.5-coder:32b
+  extra_params:
+    num_ctx: 16384
+- name: ollama_chat/qwen3.6:35b
+  extra_params:
+    num_ctx: 16384
+- name: ollama_chat/deepseek-coder-v2:latest
+  extra_params:
+    num_ctx: 16384

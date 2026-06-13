@@ -95,6 +95,15 @@ if [[ -d "$BRAIN_DIR/claude-config/agents" ]]; then
     link "$BRAIN_DIR/claude-config/agents" "$CLAUDE_DIR/agents"
 fi
 
+# Local LLM coding config (aider + ollama), symlinked into $HOME — not ~/.claude.
+# Defaults are Polaris-tuned (RTX 5080 / qwen2.5-coder); inert on machines without
+# aider+ollama installed. Override per-project with a repo-root .aider.conf.yml.
+# See local-llm/README.md for the full setup and run notes.
+if [[ -d "$BRAIN_DIR/local-llm" ]]; then
+    link "$BRAIN_DIR/local-llm/aider.conf.yml" "$HOME/.aider.conf.yml"
+    link "$BRAIN_DIR/local-llm/aider.model.settings.yml" "$HOME/.aider.model.settings.yml"
+fi
+
 # Seed settings.local.json from the example on first run only. Machine-local
 # overrides accumulate after that and stay out of the repo.
 if [[ -f "$BRAIN_DIR/claude-config/settings.local.example.json" && ! -e "$CLAUDE_DIR/settings.local.json" ]]; then
