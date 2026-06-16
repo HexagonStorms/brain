@@ -7,4 +7,5 @@
 - [wiki.pastlives.space](reference_wiki_pastlives.md) — MediaWiki for Past Lives Makerspace, on the Hetzner VPS; docroot and troubleshooting paths.
 - [myartstarz.com](reference_myartstarz.md) — client WP/WooCommerce site on Hetzner; repo, deploy flow, docroot, retired plaza.codes alias.
 - [Stash TV plugin](project_stash_tv.md) — reel-style viewer Jo loves; bespoke plugin parked unless O-counter/quick-tag gaps grind; Stash API key via docker exec.
+- [qBittorrent upload throttle](project_qbit_upload_throttle.md) — seeding saturated the uplink and buffered Jellyfin; fix is an API-set upload cap (qBit 5.x ignores the old conf key, uses `GlobalUPSpeedLimit`); creds in media-server `.env`.
 - [Seerr content filtering](project_seerr_content_filtering.md) — keyword blocklist + disabled theatrical sliders + daily seerr-hide-theatrical.sh cron; don't hand-edit its state file.
