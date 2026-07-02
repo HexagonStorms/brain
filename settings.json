@@ -4,7 +4,10 @@
     "pr": ""
   },
   "permissions": {
-    "defaultMode": "auto"
+    "defaultMode": "auto",
+    "additionalDirectories": [
+      "/home/josh"
+    ]
   },
   "hooks": {
     "PreToolUse": [
@@ -52,8 +55,8 @@
   },
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": false,
+    "code-review@claude-plugins-official": false,
     "code-simplifier@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
     "claude-md-management@claude-plugins-official": true,
@@ -63,11 +66,20 @@
     "stripe@claude-plugins-official": true,
     "laravel-boost@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "pr-review-toolkit@claude-plugins-official": true
+    "pr-review-toolkit@claude-plugins-official": false
+  },
+  "extraKnownMarketplaces": {
+    "headroom-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "chopratejas/headroom"
+      }
+    }
   },
   "effortLevel": "xhigh",
   "tui": "fullscreen",
   "theme": "dark",
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "remoteControlAtStartup": true
 }
