@@ -6,7 +6,6 @@
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opus",
   "hooks": {
     "PreToolUse": [
       {
@@ -67,6 +66,7 @@
     "pr-review-toolkit@claude-plugins-official": true
   },
   "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "theme": "dark",
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true
