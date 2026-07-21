@@ -18,3 +18,5 @@
 - [Polaris SSH](reference_polaris_ssh.md) — `ssh polaris` into the Windows/RTX 5080 box over the tailnet; admin authorized_keys ownership gotcha.
 - [GPU upscale rig](project_gpu_upscale.md) — free Real-ESRGAN video upscaling on Polaris's 5080, driven from elowynn; C:\upscale\ + upscale.ps1.
 - [/upscale skill](../../../skills/upscale/SKILL.md) — upscale a Stash scene on Polaris's 5080, re-import as a separate cross-linked scene; orchestrator upscale.mjs.
+- [/ig-fetch skill](../../../skills/ig-fetch/SKILL.md) — grab an Instagram account's photos, keep only shots of the person (YOLOX), fold into a Stash gallery; instagram/ig-fetch.mjs.
+- [IG fetch pipeline](project_ig_fetch.md) — person-detection (not face) rationale, gallery-dl auth reality, folder-gallery title gotcha.
