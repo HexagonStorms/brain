@@ -7,5 +7,14 @@
 - [wiki.pastlives.space](reference_wiki_pastlives.md) — MediaWiki for Past Lives Makerspace, on the Hetzner VPS; docroot and troubleshooting paths.
 - [myartstarz.com](reference_myartstarz.md) — client WP/WooCommerce site on Hetzner; repo, deploy flow, docroot, retired plaza.codes alias.
 - [Stash TV plugin](project_stash_tv.md) — reel-style viewer Jo loves; bespoke plugin parked unless O-counter/quick-tag gaps grind; Stash API key via docker exec.
+- [Wifi band flip](project_wifi_band_flip.md) — elowynn wifi crawls when the card wedges onto 2.4 GHz; `wpa_cli reassociate` flips it back to 5 GHz. Runbook: `wifi-recovery` skill.
+- [No ethernet for elowynn](feedback_no_ethernet_elowynn.md) — workshop warehouse, wifi-only forever; never suggest wiring `enp3s0` or a netplan change.
 - [qBittorrent upload throttle](project_qbit_upload_throttle.md) — seeding saturated the uplink and buffered Jellyfin; fix is an API-set upload cap (qBit 5.x ignores the old conf key, uses `GlobalUPSpeedLimit`); creds in media-server `.env`.
+- [Jellyfin hev1 stutter](project_jellyfin_hev1_stutter.md) — one title stutters while the rest play fine? Suspect an MP4 tagged hev1; remux to MKV (lossless).
 - [Seerr content filtering](project_seerr_content_filtering.md) — keyword blocklist + disabled theatrical sliders + daily seerr-hide-theatrical.sh cron; don't hand-edit its state file.
+- [OnlyFans grabber](project_onlyfans_grabber.md) — stash-grab OnlyFans extractor: run via docker exec, /videos|/photos tabs + OF_MIN_VIDEO_SECONDS, creds in .env (sess rotates, UA must match), DRM auto-skipped.
+- [OnlyFans DRM decryption](project_onlyfans_drm.md) — Widevine decrypt pipeline in stash-grab (onlyfans_drm.py); license endpoint + octet-stream gotcha; needs a device.wvd (extract on Polaris; cdrm-project remote was down); code-complete, awaiting CDM.
+- [stash-creator-fetch skill](../../../skills/stash-creator-fetch/SKILL.md) — /stash-creator-fetch <url>: grab a creator into Stash, auto-gallery the photos, compile the videos.
+- [Polaris SSH](reference_polaris_ssh.md) — `ssh polaris` into the Windows/RTX 5080 box over the tailnet; admin authorized_keys ownership gotcha.
+- [GPU upscale rig](project_gpu_upscale.md) — free Real-ESRGAN video upscaling on Polaris's 5080, driven from elowynn; C:\upscale\ + upscale.ps1.
+- [/upscale skill](../../../skills/upscale/SKILL.md) — upscale a Stash scene on Polaris's 5080, re-import as a separate cross-linked scene; orchestrator upscale.mjs.
