@@ -15,6 +15,7 @@
 - [OnlyFans grabber](project_onlyfans_grabber.md) — stash-grab OnlyFans extractor: run via docker exec, /videos|/photos tabs + OF_MIN_VIDEO_SECONDS, creds in .env (sess rotates, UA must match), DRM auto-skipped.
 - [OnlyFans DRM decryption](project_onlyfans_drm.md) — Widevine decrypt pipeline in stash-grab (onlyfans_drm.py); license endpoint + octet-stream gotcha; needs a device.wvd (extract on Polaris; cdrm-project remote was down); code-complete, awaiting CDM.
 - [stash-creator-fetch skill](../../../skills/stash-creator-fetch/SKILL.md) — /stash-creator-fetch <url>: grab a creator into Stash, auto-gallery the photos, compile the videos.
+- [pending-compile staging](project_pending_compile_staging.md) — grabbed video scenes hidden until compiled, via pending-compile tag + Stash default filter; load-bearing, don't delete.
 - [Polaris SSH](reference_polaris_ssh.md) — `ssh polaris` into the Windows/RTX 5080 box over the tailnet; admin authorized_keys ownership gotcha.
 - [GPU upscale rig](project_gpu_upscale.md) — free Real-ESRGAN video upscaling on Polaris's 5080, driven from elowynn; C:\upscale\ + upscale.ps1.
 - [/upscale skill](../../../skills/upscale/SKILL.md) — upscale a Stash scene on Polaris's 5080, re-import as a separate cross-linked scene; orchestrator upscale.mjs.
