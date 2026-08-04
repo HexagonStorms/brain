@@ -33,5 +33,5 @@
 - [Verify the committed diff](feedback_verify_committed_diff.md) — after a hand-applied fix, confirm it's in the commit and on origin (`git add -A`; grep the pushed head); green working-tree tests don't prove the commit contains it.
 - [/discord-admin skill](../../../skills/discord-admin/SKILL.md) — Past Lives Discord server admin via Fog Bot REST: channels, roles, polls, events, messages; moderation once Jo grants kick/ban/timeout.
 - [legato SSH keys](reference_legato_ssh_keys.md) — `legato` = personal GitHub/Bluehost, `id_ed25519` = Automatiq work, `siloh` = both elowynn and polaris.
-- [HexagonStorms GitHub](reference_hexagonstorms_github.md) — how to commit/push as the HexagonStorms gh account.
+- [HexagonStorms GitHub](reference_hexagonstorms_github.md) — two gh accounts + `ghwork`/`ghpersonal` aliases; gh switching is independent of ssh-config key routing; saved joshplaza PATs go stale (401) — mint fresh.
 - [legato-yarg-app](project_legato_yarg_app.md) — YARG chart-downloader CLI (Encore API) at ~/Code/legato-yarg-app; Alesis Nitro Pro + midisrv gotchas.
