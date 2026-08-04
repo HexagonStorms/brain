@@ -27,7 +27,8 @@ Form factor is a laptop (3070 *Laptop* GPU, H-series CPU).
 ## Network
 
 - `eth0`: `192.168.32.240/20` (WSL NAT)
-- **Tailscale is not installed on this machine.** If cross-machine access to Elowynn or Polaris is ever needed from Lenovo, Tailscale would need to be set up first.
+- **Tailscale is installed on the Windows side**, node name **`legato`** (`100.113.220.68`). The old `lenovo`/`lenovo-ssh` tailnet nodes are stale enrollments from before the rename. No WSL-side tailscaled; outbound tailnet traffic from WSL rides the Windows client, which is enough for ssh out.
+- **SSH out (set up 2026-07-24):** dedicated keypair `~/.ssh/legato` (comment `josh@legato`), authorized on elowynn (`jo@100.90.245.125`, `~/.ssh/authorized_keys`) and polaris (`plaza@100.116.170.117`, `C:\ProgramData\ssh\administrators_authorized_keys`).
 
 ---
 

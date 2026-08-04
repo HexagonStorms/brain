@@ -41,6 +41,17 @@
         ]
       }
     ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "INPUT=$(cat); TOOL_CMD=$(echo \"$INPUT\" | jq -r '.tool_input.command // \"\"'); echo \"$TOOL_CMD\" | grep -q 'gh pr create' || exit 0; PR_URL=$(echo \"$INPUT\" | jq -r '.tool_response.output // \"\"' | grep -oE 'https://github\\.com/[^/]+/[^/]+/pull/[0-9]+' | head -1); [ -z \"$PR_URL\" ] && exit 0; ORG=$(echo \"$PR_URL\" | cut -d/ -f4); REPO=$(echo \"$PR_URL\" | cut -d/ -f5); NUMBER=$(echo \"$PR_URL\" | cut -d/ -f7); gh api -X POST \"/repos/$ORG/$REPO/pulls/$NUMBER/requested_reviewers\" -f 'reviewers[]=copilot-pull-request-reviewer' 2>/dev/null && exit 0; printf '{\"systemMessage\": \"Copilot reviewer auto-request failed — add it manually in GitHub UI.\"}'"
+          }
+        ]
+      }
+    ],
     "SessionEnd": [
       {
         "matcher": "",
@@ -79,7 +90,7 @@
   "effortLevel": "xhigh",
   "tui": "fullscreen",
   "theme": "dark",
+  "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "remoteControlAtStartup": true
+  "skipAutoPermissionPrompt": true
 }
