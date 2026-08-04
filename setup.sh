@@ -38,8 +38,10 @@ MACHINE="${MACHINE:-$(hostname | tr '[:upper:]' '[:lower:]')}"
 case "$MACHINE" in
     *elowynn*) MACHINE_FILE="$BRAIN_DIR/machines/elowynn.md" ;;
     *polaris*) MACHINE_FILE="$BRAIN_DIR/machines/polaris.md" ;;
-    *lenovo*)  MACHINE_FILE="$BRAIN_DIR/machines/lenovo.md"  ;;
-    *public*)  MACHINE_FILE="$BRAIN_DIR/machines/lenovo.md"  ;;
+    # legato is the current hostname; lenovo/public are historical names for the same laptop.
+    *legato*)  MACHINE_FILE="$BRAIN_DIR/machines/legato.md"  ;;
+    *lenovo*)  MACHINE_FILE="$BRAIN_DIR/machines/legato.md"  ;;
+    *public*)  MACHINE_FILE="$BRAIN_DIR/machines/legato.md"  ;;
     *hetzner*) MACHINE_FILE="$BRAIN_DIR/machines/hetzner.md" ;;
     *)         MACHINE_FILE="" ;;
 esac

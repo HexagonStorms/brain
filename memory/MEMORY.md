@@ -29,6 +29,9 @@
 - [IG fetch pipeline](project_ig_fetch.md) — person-detection (not face) rationale, gallery-dl auth reality, folder-gallery title gotcha.
 - [plfog PR ops](reference_plfog_pr_ops.md) — `gh auth switch --user HexagonStorms` to create PRs (joshplaza isn't a collaborator); BOT_PAT from .env via `set -a; source .env` for PastLivesReviewBot approvals.
 - [App-store reviewer login](project_appstore_reviewer_login.md) — PLAY_REVIEW_EMAIL/CODE on Render let a store reviewer past passwordless login; account appreview@pastlives.app must stay off ADMIN_DOMAINS (pastlives.space, roaming-panda.com); env change needs a redeploy.
-- [Automatiq 1Password signing (legato)](project_automatiq_1password_signing.md) — SSH commit signing via Automatiq 1Password on legato (Lenovo/WSL2); not started as of 2026-08-04; 9-step runbook in the file.
+- [Automatiq 1Password signing (legato)](project_automatiq_1password_signing.md) — SSH commit signing via Automatiq 1Password on legato; app installed + npiperelay/socat bridge built 2026-08-04, blocked on the "Use the SSH agent" toggle. WSL does NOT get the socket automatically — that old claim was wrong.
 - [Verify the committed diff](feedback_verify_committed_diff.md) — after a hand-applied fix, confirm it's in the commit and on origin (`git add -A`; grep the pushed head); green working-tree tests don't prove the commit contains it.
 - [/discord-admin skill](../../../skills/discord-admin/SKILL.md) — Past Lives Discord server admin via Fog Bot REST: channels, roles, polls, events, messages; moderation once Jo grants kick/ban/timeout.
+- [legato SSH keys](reference_legato_ssh_keys.md) — `legato` = personal GitHub/Bluehost, `id_ed25519` = Automatiq work, `siloh` = both elowynn and polaris.
+- [HexagonStorms GitHub](reference_hexagonstorms_github.md) — how to commit/push as the HexagonStorms gh account.
+- [legato-yarg-app](project_legato_yarg_app.md) — YARG chart-downloader CLI (Encore API) at ~/Code/legato-yarg-app; Alesis Nitro Pro + midisrv gotchas.
