@@ -55,6 +55,14 @@ The brain is wired up as of 2026-08-04: `~/.claude/CLAUDE.md` is composed, `sett
 
 Notably **not** installed: `pnpm`, `bun`, WSL-side `tailscale` (the Windows client covers it).
 
-## Automatiq commit signing — blocked
+## Automatiq commit signing — working
 
-Automatiq requires signed commits via 1Password SSH. **1Password is not installed on the Windows host** as of 2026-08-04, which blocks the whole runbook. See memory `project_automatiq_1password_signing` for the step-by-step.
+Automatiq requires signed commits via 1Password SSH, and this works on legato. Verified again 2026-08-06: a real sign produced a good ED25519 signature for `josh.plaza@automatiq.com` (key `SHA256:XukZHWAOP1DYe0NQAvt1oIQHX0lk5DJbR8PAGsMqNH8`).
+
+An earlier version of this section claimed 1Password was not installed on the Windows host and the runbook was blocked. **That was wrong** — it is installed as an MSIX/Store package, which is why it does not appear under `C:\Program Files\1Password`. Verify with `winget list --exact --id AgileBits.1Password`, never by looking in Program Files.
+
+**It fails closed.** `commit.gpgsign = true` is scoped to `~/Code/automatiq/` via `~/.gitconfig-automatiq`, so when the Windows 1Password app is closed or locked, commits in Automatiq repos only will fail. The error is `communication with agent failed` — and note it appears even when `ssh-add -l` happily lists the key, because enumeration succeeds while signing still needs the app to authorize. Do not read a populated `ssh-add -l` as proof signing works; probe an actual sign.
+
+Recovery, in order: open/unlock 1Password on Windows, then `~/.local/bin/op-ssh-agent-relay` (exit 0 means the agent is live). To bypass once: `git -c commit.gpgsign=false commit`, but the commit will need re-signing before Automatiq will merge it.
+
+Full runbook, including the npiperelay + socat bridge WSL needs, in memory `project_automatiq_1password_signing`.
