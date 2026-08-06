@@ -9,6 +9,7 @@
       "/home/josh"
     ]
   },
+  "model": "opus[1m]",
   "hooks": {
     "PreToolUse": [
       {

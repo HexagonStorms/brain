@@ -35,3 +35,4 @@
 - [legato SSH keys](reference_legato_ssh_keys.md) — `legato` = personal GitHub/Bluehost, `id_ed25519` = Automatiq work, `siloh` = both elowynn and polaris.
 - [HexagonStorms GitHub](reference_hexagonstorms_github.md) — two gh accounts + `ghwork`/`ghpersonal` aliases; gh switching is independent of ssh-config key routing; saved joshplaza PATs go stale (401) — mint fresh.
 - [legato-yarg-app](project_legato_yarg_app.md) — YARG chart-downloader CLI (Encore API) at ~/Code/legato-yarg-app; Alesis Nitro Pro + midisrv gotchas.
+- [plfog context_ blocks don't run](project_plfog_context_blocks_dont_run.md) — it_* nested in a context_* block silently never executes; write specs flat, only describe_* nests.
