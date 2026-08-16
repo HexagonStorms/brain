@@ -95,6 +95,11 @@ if [[ -d "$BRAIN_DIR/claude-config/agents" ]]; then
     link "$BRAIN_DIR/claude-config/agents" "$CLAUDE_DIR/agents"
 fi
 
+# Skills travel with the brain too, same as commands/agents.
+if [[ -d "$BRAIN_DIR/skills" ]]; then
+    link "$BRAIN_DIR/skills" "$CLAUDE_DIR/skills"
+fi
+
 # Local LLM coding config (aider + ollama), symlinked into $HOME — not ~/.claude.
 # Defaults are Polaris-tuned (RTX 5080 / qwen2.5-coder); inert on machines without
 # aider+ollama installed. Override per-project with a repo-root .aider.conf.yml.

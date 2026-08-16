@@ -14,12 +14,18 @@
 - [Seerr content filtering](project_seerr_content_filtering.md) — keyword blocklist + disabled theatrical sliders + daily seerr-hide-theatrical.sh cron; don't hand-edit its state file.
 - [OnlyFans grabber](project_onlyfans_grabber.md) — stash-grab OnlyFans extractor: run via docker exec, /videos|/photos tabs + OF_MIN_VIDEO_SECONDS, creds in .env (sess rotates, UA must match), DRM auto-skipped.
 - [OnlyFans DRM decryption](project_onlyfans_drm.md) — Widevine decrypt pipeline in stash-grab (onlyfans_drm.py); license endpoint + octet-stream gotcha; needs a device.wvd (extract on Polaris; cdrm-project remote was down); code-complete, awaiting CDM.
-- [stash-creator-fetch skill](../../../skills/stash-creator-fetch/SKILL.md) — /stash-creator-fetch <url>: grab a creator into Stash, auto-gallery the photos, compile the videos.
+- [stash-creator-fetch skill](../skills/stash-creator-fetch/SKILL.md) — /stash-creator-fetch <url>: grab a creator into Stash, auto-gallery the photos, compile the videos.
 - [pending-compile staging](project_pending_compile_staging.md) — grabbed video scenes hidden until compiled, via pending-compile tag + Stash default filter; load-bearing, don't delete.
+- [stash-storage dashboard](project_stash_storage_dashboard.md) — storage.plaza.codes: ranks Stash creators by disk use + reduction levers (biggest/oversized/dupes/cold); read-only Node service on :8801.
 - [Polaris SSH](reference_polaris_ssh.md) — `ssh polaris` into the Windows/RTX 5080 box over the tailnet; admin authorized_keys ownership gotcha.
 - [GPU upscale rig](project_gpu_upscale.md) — free Real-ESRGAN video upscaling on Polaris's 5080, driven from elowynn; C:\upscale\ + upscale.ps1.
-- [/upscale skill](../../../skills/upscale/SKILL.md) — upscale a Stash scene on Polaris's 5080, re-import as a separate cross-linked scene; orchestrator upscale.mjs.
-- [/ig-fetch skill](../../../skills/ig-fetch/SKILL.md) — grab an Instagram account's photos, keep only shots of the person (YOLOX), fold into a Stash gallery; instagram/ig-fetch.mjs.
-- [/redgifs-fetch skill](../../../skills/redgifs-fetch/SKILL.md) — grab every video from a RedGifs user into Stash, compile into one; redgifs/redgifs-fetch.mjs.
+- [/upscale skill](../skills/upscale/SKILL.md) — upscale a Stash scene on Polaris's 5080, re-import as a separate cross-linked scene; orchestrator upscale.mjs.
+- [/ig-fetch skill](../skills/ig-fetch/SKILL.md) — grab an Instagram account's photos, keep only shots of the person (YOLOX), fold into a Stash gallery; instagram/ig-fetch.mjs.
+- [/redgifs-fetch skill](../skills/redgifs-fetch/SKILL.md) — grab every video from a RedGifs user into Stash, compile into one; redgifs/redgifs-fetch.mjs.
 - [RedGifs fetch pipeline](project_redgifs_fetch.md) — yt-dlp playlist grab, bulk performer/studio, single Shorts comp; plus compile-all.sh + queue-retry.sh batch tooling.
 - [IG fetch pipeline](project_ig_fetch.md) — person-detection (not face) rationale, gallery-dl auth reality, folder-gallery title gotcha.
+- [Claude dual accounts](reference_claude_dual_accounts.md) — personal (plazajosue2, Max 20x) vs work autoamtiq (Max 5x, org-disabled features like /rc); check active login before blaming a bug.
+- [Polaris headroom /rc regression](project_polaris_headroom_rc_regression.md) — Claude Code 2.1.219 hides /rc under a custom ANTHROPIC_BASE_URL (headroom's proxy); fixed by pinning `~/.local/bin/claude` symlink back to 2.1.218; WSL access is via `ssh polaris` + `wsl -d Ubuntu -u josh`.
+- [Polaris WSL root-owned tmp recurs](project_polaris_wsl_default_root.md) — root-owned /tmp/claude-1001 blocks claude launches; wsl.conf default=josh fix (07-27) didn't stop recurrence (07-31), correlated w/ Docker Desktop WSL integration, cause still open.
+- [Always consult before budget changes](feedback_consult_before_budget_changes.md) — never write to Actual Budget or bank-linked data without proposing first and getting explicit go-ahead, standing rule.
+- [Actual Budget setup](project_actual_budget.md) — budget.plaza.codes, USAA pay account (may move to OnPoint), ~$9k/mo est. income (verify), starting-budget generation in progress.
