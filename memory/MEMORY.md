@@ -2,8 +2,12 @@
 - [Skip preflight questions on basic dev setup](feedback_skip_preflight.md) — don't ask about SSH/git/WSL/etc. the user obviously already has; verify from env or assume competence.
 - [Use zsh, not bash](feedback_zsh_not_bash.md) — shell scripts get `#!/usr/bin/env zsh`; invoke as `zsh script.sh`. User runs zsh everywhere.
 - [No dashes in copy-ready artifacts](feedback_no_dashes_in_copy.md) — em/standard dashes are fine in chat and docs, but never in shell commands, commits, code, or messages Jo will paste verbatim.
+- [ELI14 tone for plfog member copy](feedback_eli14_member_copy.md) — Wiki guides / changelog / notices: concise, plain, short sentences, no filler; keep every fact + permission caveat.
 - [Cheddar the cat](user_cheddar.md) — the user's cat; sometimes types via keyboard.
+- [Front-page override + proxy cache](project_frontpage_override_cache.md) — homepage lives in wp_template post 5168 (DB wins over theme file); Bluehost proxy cache needs `curl -X PURGE` after updates.
+- [Plaza Codes business plan](project_plaza_codes_business_plan.md) — pricing tiers, ranked lead channels (Portland local small biz), care plan at $75/mo, sequencing.
 - [Hetzner VPS](reference_hetzner_vps.md) — `ssh hetzner` (5.78.148.196); plaza.codes production web host, nginx/PHP 8.3/MariaDB, hosted sites list.
+- [plaza.codes Cloudflare cache](project_plaza_codes_cloudflare_cache.md) — site is CF-proxied with 1y immutable statics; rename changed assets in public/, don't swap in place.
 - [wiki.pastlives.space](reference_wiki_pastlives.md) — MediaWiki for Past Lives Makerspace, on the Hetzner VPS; docroot and troubleshooting paths.
 - [myartstarz.com](reference_myartstarz.md) — client WP/WooCommerce site on Hetzner; repo, deploy flow, docroot, retired plaza.codes alias.
 - [Stash TV plugin](project_stash_tv.md) — reel-style viewer Jo loves; bespoke plugin parked unless O-counter/quick-tag gaps grind; Stash API key via docker exec.
@@ -29,3 +33,12 @@
 - [Polaris WSL root-owned tmp recurs](project_polaris_wsl_default_root.md) — root-owned /tmp/claude-1001 blocks claude launches; wsl.conf default=josh fix (07-27) didn't stop recurrence (07-31), correlated w/ Docker Desktop WSL integration, cause still open.
 - [Always consult before budget changes](feedback_consult_before_budget_changes.md) — never write to Actual Budget or bank-linked data without proposing first and getting explicit go-ahead, standing rule.
 - [Actual Budget setup](project_actual_budget.md) — budget.plaza.codes, USAA pay account (may move to OnPoint), ~$9k/mo est. income (verify), starting-budget generation in progress.
+- [plfog PR ops](reference_plfog_pr_ops.md) — `gh auth switch --user HexagonStorms` to create PRs (joshplaza isn't a collaborator); BOT_PAT from .env via `set -a; source .env` for PastLivesReviewBot approvals.
+- [App-store reviewer login](project_appstore_reviewer_login.md) — PLAY_REVIEW_EMAIL/CODE on Render let a store reviewer past passwordless login; account appreview@pastlives.app must stay off ADMIN_DOMAINS (pastlives.space, roaming-panda.com); env change needs a redeploy.
+- [Automatiq 1Password signing (legato)](project_automatiq_1password_signing.md) — ✅ working 2026-08-04. WSL needs an npiperelay+socat bridge (the socket is NOT exposed automatically); auth and signing use deliberately different keys; `--allow-empty` sweeps in staged files.
+- [Verify the committed diff](feedback_verify_committed_diff.md) — after a hand-applied fix, confirm it's in the commit and on origin (`git add -A`; grep the pushed head); green working-tree tests don't prove the commit contains it.
+- [/discord-admin skill](../skills/discord-admin/SKILL.md) — Past Lives Discord server admin via Fog Bot REST: channels, roles, polls, events, messages; moderation once Jo grants kick/ban/timeout.
+- [legato SSH keys](reference_legato_ssh_keys.md) — `legato` = personal GitHub/Bluehost, `id_ed25519` = Automatiq work, `siloh` = both elowynn and polaris.
+- [HexagonStorms GitHub](reference_hexagonstorms_github.md) — two gh accounts + `ghwork`/`ghpersonal` aliases; gh switching is independent of ssh-config key routing; saved joshplaza PATs go stale (401) — mint fresh.
+- [legato-yarg-app](project_legato_yarg_app.md) — YARG chart-downloader CLI (Encore API) at ~/Code/legato-yarg-app; Alesis Nitro Pro + midisrv gotchas.
+- [plfog context_ blocks don't run](project_plfog_context_blocks_dont_run.md) — it_* nested in a context_* block silently never executes; write specs flat, only describe_* nests.
