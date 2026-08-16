@@ -42,3 +42,5 @@
 - [HexagonStorms GitHub](reference_hexagonstorms_github.md) — two gh accounts + `ghwork`/`ghpersonal` aliases; gh switching is independent of ssh-config key routing; saved joshplaza PATs go stale (401) — mint fresh.
 - [legato-yarg-app](project_legato_yarg_app.md) — YARG chart-downloader CLI (Encore API) at ~/Code/legato-yarg-app; Alesis Nitro Pro + midisrv gotchas.
 - [plfog context_ blocks don't run](project_plfog_context_blocks_dont_run.md) — it_* nested in a context_* block silently never executes; write specs flat, only describe_* nests.
+- [*arr IPv6 disable fix](project_arr_ipv6_disable.md) — Radarr/Sonarr/Prowlarr had no IPv6 route but their proxy hosts resolve AAAA; DOTNET_SYSTEM_NET_DISABLEIPV6=true fixed it; prowlarr's compose change still uncommitted.
+- [Invader Zim manual import pending](project_invader_zim_manual_import.md) — torrent added straight to qBittorrent (Pirate Bay season-filter bug), needs Sonarr Manual Import once it finishes; delete this memory once done.

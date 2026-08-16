@@ -93,5 +93,38 @@
   "theme": "dark",
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured (personal homelab; git remotes under github.com/HexagonStorms and github.com/Past-Lives-Makerspace, but only this repo — ~/, which has no remote — is in scope)",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: assume private — this project's git repo has no remote configured (untracked, 0 tracked files); repo visibility check via gh not queryable here",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured — secrets observed as local dotfiles: ~/Code/elowynn-media-server/.env, ~/Code/plfog/.env, ~/.claude/.credentials.json, ~/.local/share/gogcli/credentials.json",
+      "**Default / protected branches**: not queryable here (no remote on this repo)",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: Tailscale mesh VPN (tailnet host 'elowynn', 100.90.245.125); no public ports without deliberate reverse-proxy setup; remote access via `tailscale ssh`",
+      "**Source control**: This machine's home directory (~/), an untracked local checkout with no remote — as scoped by Trusted repo below",
+      "**Trusted internal domains**: *.plaza.codes (storage.plaza.codes, budget.plaza.codes, grab.plaza.codes, jellyfin.plaza.codes, azium.plaza.codes seen in skill docs) — Tailscale/self-hosted services on Jo's own infrastructure",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: Jellyfin (localhost:8096, jellyfin.plaza.codes), Radarr (localhost:7878), Stash (azium.plaza.codes, /media/data/stash), qBittorrent (127.0.0.1:8080)",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: /media (15TB media vault: adult content, Stash library, personal media — private/self only); .env files under ~/Code/*/ (OnlyFans/API credentials); ~/.claude/.credentials.json; ~/.local/share/gogcli/credentials.json; Downloads/client_secret_*.apps.googleusercontent.com.json (Google OAuth client secret) — share only with Jo",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (e.g. `db-pull-prod` Makefile target seen in a sibling repo — treat prod-pull/prod-db operations as sensitive)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: personal homelab administration and self-hosted media server management (elowynn machine) — includes adult-content pipeline tooling (Stash, OnlyFans/Instagram/RedGifs fetchers), Jellyfin/Radarr maintenance, wifi/network diagnostics, and system administration",
+      "**Trusted repo**: The working directory ~/ (this session's checkout) — it has no git remote configured, so treat it as a local-only, unpublished checkout; nothing here should be pushed anywhere without explicit direction",
+      "**Org-specific CLIs**: wpa_cli, tailscale, docker (compose-first), gh, sqlite3, ffmpeg/ffprobe, yt-dlp, gallery-dl (media-fetch tooling used routinely on elowynn)",
+      "routine under /media/ prefix: read/organize operations on the media vault are routine; writes there are precious and should not be casual per CLAUDE.md"
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Bash(systemctl stop:*) in this environment — service stack lifecycle on elowynn should be confirmed, not auto-approved, given multiple Docker-composed services share the host",
+      "Writes/deletes under /media/ larger than a single file (bulk prune or clean operations) — CLAUDE.md flags this vault as precious and not to be written to casually"
+    ]
+  }
 }
