@@ -4,10 +4,13 @@ description: >-
   Diagnose and fix slow, laggy, or high-latency wifi on the elowynn machine.
   Use this whenever Jo says the wifi/internet/network is slow, "super slow",
   laggy, buffering, or that things feel unresponsive over the network, even if
-  he does not say the word "wifi". The usual root cause is the Intel card
-  wedging onto the crowded 2.4 GHz band; the fix is a reassociate that flips it
-  back to 5 GHz. Also covers ruling out bandwidth hogs (qBittorrent). Elowynn is
-  wifi-only (workshop warehouse); never suggest ethernet.
+  he does not say the word "wifi". Also use it when *.plaza.codes returns a
+  Cloudflare 503 or SSH into elowynn hangs for minutes, which are downstream
+  symptoms of the same link fault. Root cause is the Intel card ending up on a
+  weak 2.4 GHz radio: either wedged on the local AP's 2.4 band, or roamed onto a
+  distant 2.4 GHz-only mesh node. Fix is a reassociate; the durable fix
+  (netplan band: 5GHz) is already applied. Also covers ruling out bandwidth hogs
+  (qBittorrent). Elowynn is wifi-only (workshop warehouse); never suggest ethernet.
 ---
 
 # Wifi recovery on elowynn
@@ -52,7 +55,21 @@ sudo wpa_cli -i wlo1 signal_poll
 - `FREQUENCY=2437` + `LINKSPEED` under ~150 → wedged on 2.4 GHz. This is the case
   the reassociate fixes. `RSSI` around -73 confirms the weak-band story.
 - `FREQUENCY=51xx` with good `RSSI` (-40s/-50s) and high `LINKSPEED` → the radio
-  is already fine; the slowness is something else (go to step 4).
+  is fine **right now**.
+
+**A healthy poll does NOT exonerate the radio.** `signal_poll` is instantaneous,
+so if the link already flapped and recovered, everything looks perfect while the
+user is describing a real outage. Whenever the complaint is in the past tense
+("it was 503ing", "I couldn't SSH in for 20 minutes"), skip ahead and read the
+logs for a carrier drop before concluding it was something else:
+
+```
+sudo dmesg -T | grep -iE "wlo1|iwlwifi" | tail -30
+sudo journalctl -u systemd-networkd --since "2 hours ago" | grep -iE "carrier|lease"
+```
+
+"Lost carrier" / "DHCP lease lost" / "Connection to AP lost" means the link
+dropped, and that is your answer no matter how good the current numbers look.
 
 Rule out a bandwidth hog only if the band looks healthy. qBittorrent runs behind
 gluetun; its web API is on `127.0.0.1:8080` (creds in
@@ -101,16 +118,70 @@ ping -c 5 -i 0.3 -W 2 "$GW" | tail -2
 Success looks like: `FREQUENCY=51xx`, RSSI in the -40s/-50s, gateway RTT back to
 single-digit ms. Report the before/after numbers so Jo can see the delta.
 
-## The durable fix (wifi-only — do NOT suggest ethernet)
+## The durable fix (APPLIED 2026-08-17 — wifi-only, do NOT suggest ethernet)
 
 Ethernet is not an option and never will be: elowynn lives in a workshop
 warehouse with no way to run a wire to the router. Do not propose plugging in
-`enp3s0`, staging a netplan change, or "the real fix is a wire." Jo has ruled
-this out repeatedly; raising it again is the wrong move.
+`enp3s0` or "the real fix is a wire." Jo has ruled this out repeatedly.
 
-The durable fix within wifi is a **ping-and-reassociate watchdog**: a small
-systemd user timer that pings the gateway every minute and, when RTT crosses a
-threshold (or the card reports `FREQUENCY=24xx`), runs the step-3 recovery
-automatically. That turns this from a manual chore into a self-heal. Offer to
-stage it if the band-flip keeps recurring; otherwise this skill is the manual
-path.
+**The fix is already in place.** `/etc/netplan/00-installer-config.yaml` now
+carries `band: 5GHz` under the access-point:
+
+```
+      access-points:
+        "Past Lives Members":
+           password: <redacted>
+           band: 5GHz
+```
+
+Netplan renders that as a `freq_list=` of every 5 GHz channel in
+`/run/netplan/wpa-wlo1.conf`. Verify it is still present before doing anything
+else; if it has been lost, restoring it is the fix.
+
+### Why that works (root cause, found 2026-08-17)
+
+"Past Lives Members" is a multi-AP mesh with two vendor groups:
+
+| BSSID | Band | Signal | Role |
+|---|---|---|---|
+| `6c:5a:b0:9e:b0:30` | 2.4 GHz | -36 | local AP, 2.4 radio |
+| `6c:5a:b0:9e:b0:31` | 5 GHz | -54 | local AP, **the good one** |
+| `14:eb:b6:*` (four of them) | 2.4 GHz only | -73 to -82 | distant nodes |
+
+With no band constraint the card roamed onto the distant 2.4 GHz-only nodes,
+missed beacons, and lost carrier. There is no 802.11r (`[WPA2-PSK-CCMP][ESS]`,
+no `[FT]`), so each roam is a full re-auth: carrier drops, **DHCPv4 and DHCPv6
+leases drop**, and every established connection breaks at once. That is why the
+user-visible symptom is often not "slow wifi" but a **Cloudflare 503** (cloudflared
+loses its QUIC edge connections and cannot dial new ones) and **SSH hanging**.
+
+Confirm this specific failure with:
+
+```
+sudo dmesg -T | grep -iE "wlo1|iwlwifi" | tail -30
+sudo journalctl -u systemd-networkd --since "1 hour ago" | tail -20
+sudo journalctl -u cloudflared --since "1 hour ago" | grep -iE "quic|Registered"
+```
+
+Look for "missed beacons", "Connection to AP lost", "Lost carrier", "DHCP lease
+lost". Note cloudflared runs as a **bare process**, not a systemd unit, so find
+it with `pgrep -af cloudflared` and read its log via `journalctl _PID=<pid>`.
+
+### If it still flaps
+
+Escalate from the soft band constraint to a hard BSSID pin
+(`bssid: 6c:5a:b0:9e:b0:31` alongside `band: 5GHz`). Beyond that, a
+ping-and-reassociate watchdog (systemd timer) is the reactive backstop.
+
+### Editing netplan safely
+
+Always arm a timed auto-revert first, so a bad config cannot strand a machine
+you can only reach over the network:
+
+```
+sudo cp -a /etc/netplan/00-installer-config.yaml /root/netplan-00-installer-config.yaml.bak
+sudo systemd-run --on-active=240 --unit=netplan-revert /bin/sh -c 'cp -a /root/netplan-00-installer-config.yaml.bak /etc/netplan/00-installer-config.yaml && netplan apply'
+```
+
+Apply, verify association and latency, then cancel with
+`sudo systemctl stop netplan-revert.timer`.
